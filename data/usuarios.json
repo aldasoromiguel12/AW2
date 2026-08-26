@@ -1,0 +1,47 @@
+[
+  {
+    "id": 1,
+    "nombre": "María",
+    "apellido": "González",
+    "email": "maria.gonzalez@example.com",
+    "password": "P4ssw0rd!",
+    "telefono": "+5491123456789",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "nombre": "Javier",
+    "apellido": "Pérez",
+    "email": "javier.perez@example.com",
+    "password": "jP3r3z2026",
+    "telefono": "+5491166677788",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "nombre": "Lucía",
+    "apellido": "Ramírez",
+    "email": "lucia.ramirez@example.com",
+    "password": "lR!m2020",
+    "telefono": "+5491177788990",
+    "activo": false
+  },
+  {
+    "id": 4,
+    "nombre": "Martín",
+    "apellido": "Rodríguez",
+    "email": "martin.rodriguez@example.com",
+    "password": "mRod-55",
+    "telefono": "+5491144455566",
+    "activo": true
+  },
+  {
+    "id": 5,
+    "nombre": "Ana",
+    "apellido": "Fernández",
+    "email": "ana.fernandez@example.com",
+    "password": "AneF#99",
+    "telefono": "+5491133332221",
+    "activo": true
+  }
+]

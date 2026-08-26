@@ -1,0 +1,109 @@
+[
+  {
+    "id": 1,
+    "id_usuario": 2,
+    "fecha": "2026-08-01",
+    "total": 13699.80,
+    "direccion": {
+      "calle": "Av. Siempre Viva",
+      "numero": 742,
+      "ciudad": "Springfield",
+      "codigoPostal": "2000"
+    },
+    "estado": "enviado",
+    "pagado": true,
+    "productos": [
+      { "id_producto": 3, "cantidad": 1, "precio_unitario": 12500.00 },
+      { "id_producto": 6, "cantidad": 2, "precio_unitario": 599.90 }
+    ]
+  },
+  {
+    "id": 2,
+    "id_usuario": 1,
+    "fecha": "2026-08-03",
+    "total": 5798.00,
+    "direccion": {
+      "calle": "Calle Falsa",
+      "numero": 123,
+      "ciudad": "Buenos Aires",
+      "codigoPostal": "1001"
+    },
+    "estado": "entregado",
+    "pagado": true,
+    "productos": [
+      { "id_producto": 1, "cantidad": 2, "precio_unitario": 2499.50 },
+      { "id_producto": 7, "cantidad": 1, "precio_unitario": 799.00 }
+    ]
+  },
+  {
+    "id": 3,
+    "id_usuario": 5,
+    "fecha": "2026-08-05",
+    "total": 8999.90,
+    "direccion": {
+      "calle": "Rivadavia",
+      "numero": 456,
+      "ciudad": "Mar del Plata",
+      "codigoPostal": "7600"
+    },
+    "estado": "pendiente",
+    "pagado": false,
+    "productos": [
+      { "id_producto": 5, "cantidad": 1, "precio_unitario": 8999.90 }
+    ]
+  },
+  {
+    "id": 4,
+    "id_usuario": 3,
+    "fecha": "2026-08-10",
+    "total": 7497.95,
+    "direccion": {
+      "calle": "Pueyrredón",
+      "numero": 88,
+      "ciudad": "Córdoba",
+      "codigoPostal": "5000"
+    },
+    "estado": "enviado",
+    "pagado": true,
+    "productos": [
+      { "id_producto": 8, "cantidad": 1, "precio_unitario": 3499.95 },
+      { "id_producto": 2, "cantidad": 2, "precio_unitario": 1999.00 }
+    ]
+  },
+  {
+    "id": 5,
+    "id_usuario": 4,
+    "fecha": "2026-08-12",
+    "total": 7299.69,
+    "direccion": {
+      "calle": "Belgrano",
+      "numero": 321,
+      "ciudad": "Rosario",
+      "codigoPostal": "2002"
+    },
+    "estado": "enviado",
+    "pagado": true,
+    "productos": [
+      { "id_producto": 4, "cantidad": 1, "precio_unitario": 5499.99 },
+      { "id_producto": 6, "cantidad": 3, "precio_unitario": 599.90 }
+    ]
+  },
+  {
+    "id": 6,
+    "id_usuario": 1,
+    "fecha": "2026-08-15",
+    "total": 14999.50,
+    "direccion": {
+      "calle": "San Martín",
+      "numero": 10,
+      "ciudad": "Mendoza",
+      "codigoPostal": "5500"
+    },
+    "estado": "entregado",
+    "pagado": true,
+    "productos": [
+      { "id_producto": 1, "cantidad": 1, "precio_unitario": 2499.50 },
+      { "id_producto": 3, "cantidad": 1, "precio_unitario": 12500.00 }
+    ]
+  }
+]
