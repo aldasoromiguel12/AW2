@@ -1,10 +1,10 @@
 [
   {
     "id": 1,
-    "nombre": "Remera Running Pro",
+    "nombre": "Remera Running",
     "descripcion": "Remera ligera y transpirable para running",
     "categoria": "Remeras",
-    "precio": 2499.50,
+    "precio": 24999.00,
     "stock": 25,
     "imagen": "https://example.com/images/remera_running_pro.jpg",
     "disponible": true
@@ -14,7 +14,7 @@
     "nombre": "Short Deportivo Light",
     "descripcion": "Short corto, material elástico y secado rápido",
     "categoria": "Shorts",
-    "precio": 1999.00,
+    "precio": 19999.00,
     "stock": 30,
     "imagen": "https://example.com/images/short_deportivo_light.jpg",
     "disponible": true
@@ -24,7 +24,7 @@
     "nombre": "Zapatillas Runner X",
     "descripcion": "Zapatillas de alta amortiguación para corredores",
     "categoria": "Zapatillas",
-    "precio": 12500.00,
+    "precio": 125000.00,
     "stock": 12,
     "imagen": "https://example.com/images/zapatillas_runner_x.jpg",
     "disponible": true
@@ -34,7 +34,7 @@
     "nombre": "Buzo Hoodie",
     "descripcion": "Buzo con capucha, interior afelpado",
     "categoria": "Buzos",
-    "precio": 5499.99,
+    "precio": 34000.00,
     "stock": 18,
     "imagen": "https://example.com/images/buzo_hoodie.jpg",
     "disponible": true
@@ -44,7 +44,7 @@
     "nombre": "Campera Impermeable",
     "descripcion": "Campera corta resistente al agua",
     "categoria": "Camperas",
-    "precio": 8999.90,
+    "precio": 80000,
     "stock": 7,
     "imagen": "https://example.com/images/campera_impermeable.jpg",
     "disponible": true
@@ -54,7 +54,7 @@
     "nombre": "Medias Deportivas Pack x3",
     "descripcion": "Pack de 3 pares, anti-deslizantes",
     "categoria": "Accesorios",
-    "precio": 599.90,
+    "precio": 1000,
     "stock": 50,
     "imagen": "https://example.com/images/medias_pack3.jpg",
     "disponible": true
@@ -64,7 +64,7 @@
     "nombre": "Gorra UV",
     "descripcion": "Gorra con protección UV y ajuste trasero",
     "categoria": "Accesorios",
-    "precio": 799.00,
+    "precio": 2000.00,
     "stock": 40,
     "imagen": "https://example.com/images/gorra_uv.jpg",
     "disponible": true
@@ -74,7 +74,7 @@
     "nombre": "Leggings Comfort",
     "descripcion": "Leggings de compresión para entrenamiento",
     "categoria": "Leggings",
-    "precio": 3499.95,
+    "precio": 35000.00,
     "stock": 20,
     "imagen": "https://example.com/images/leggings_comfort.jpg",
     "disponible": true
