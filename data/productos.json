@@ -34,7 +34,7 @@
     "nombre": "Buzo Hoodie",
     "descripcion": "Buzo con capucha, interior afelpado",
     "categoria": "Buzos",
-    "precio": 34000.00,
+    "precio": 44000.00,
     "stock": 18,
     "imagen": "https://example.com/images/buzo_hoodie.jpg",
     "disponible": true
@@ -54,7 +54,7 @@
     "nombre": "Medias Deportivas Pack x3",
     "descripcion": "Pack de 3 pares, anti-deslizantes",
     "categoria": "Accesorios",
-    "precio": 1000,
+    "precio": 20000,
     "stock": 50,
     "imagen": "https://example.com/images/medias_pack3.jpg",
     "disponible": true
@@ -64,7 +64,7 @@
     "nombre": "Gorra UV",
     "descripcion": "Gorra con protección UV y ajuste trasero",
     "categoria": "Accesorios",
-    "precio": 2000.00,
+    "precio": 40000.00,
     "stock": 40,
     "imagen": "https://example.com/images/gorra_uv.jpg",
     "disponible": true
