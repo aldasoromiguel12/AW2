@@ -1,9 +1,12 @@
-const express = require('express');
-const fs = require('fs');
-const path = require('path');
+import express from 'express';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const DATA_DIR = path.join(__dirname, 'data');
 const FILES = {
   productos: path.join(DATA_DIR, 'productos.json'),
@@ -282,10 +285,10 @@ app.use((error, req, res, next) => {
   next(error);
 });
 
-if (require.main === module) {
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
   app.listen(PORT, () => {
     console.log(`Servidor ejecutándose en http://localhost:${PORT}`);
   });
 }
 
-module.exports = app;
+export default app;

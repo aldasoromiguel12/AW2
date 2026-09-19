@@ -4,6 +4,8 @@ Este proyecto es un servidor: recibe pedidos y devuelve datos en formato JSON.
 
 Los datos se guardan en los archivos de la carpeta `data/`.
 
+> Importante: este proyecto usa ES modules (`"type": "module"` en `package.json`). El código está escrito con sintaxis ES6/import-export y no con CommonJS.
+
 ## Cómo iniciar el servidor
 
 En la terminal, dentro de la carpeta del proyecto, ejecutar:
@@ -65,6 +67,7 @@ Body para iniciar sesión:
 ```
 
 El campo `telefono` es un string.
+
 ## Rutas de ventas
 
 | Método | Ruta | Qué hace |
