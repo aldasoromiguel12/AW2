@@ -1,4 +1,6 @@
 import express from 'express';
+import cors from 'cors';
+import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -7,13 +9,15 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const DATA_DIR = path.join(__dirname, 'data');
+const DATA_DIR = process.env.DATA_DIR || path.join(__dirname, 'data');
 const FILES = {
   productos: path.join(DATA_DIR, 'productos.json'),
   usuarios: path.join(DATA_DIR, 'usuarios.json'),
-  ventas: path.join(DATA_DIR, 'ventas.json')
+  ventas: path.join(DATA_DIR, 'ventas.json'),
+  pedidos: path.join(DATA_DIR, 'pedidos.json')
 };
 
+app.use(cors());
 app.use(express.json());
 
 function readData(entity) {
@@ -83,6 +87,92 @@ function calculateSaleTotal(items, products) {
     return total + product.precio * item.cantidad;
   }, 0).toFixed(2));
 }
+
+app.get('/api/products', (req, res) => {
+  const products = readData('productos');
+  const category = typeof req.query.category === 'string' ? req.query.category.trim() : '';
+  const filteredProducts = category
+    ? products.filter((product) => product.categoria.toLowerCase() === category.toLowerCase())
+    : products;
+
+  res.json(filteredProducts);
+});
+
+app.post('/api/orders', (req, res) => {
+  const body = req.body && typeof req.body === 'object' ? req.body : {};
+  const { user, items, total } = body;
+  if (
+    !user ||
+    typeof user.nombre !== 'string' ||
+    !user.nombre.trim() ||
+    typeof user.email !== 'string' ||
+    !user.email.trim() ||
+    !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email.trim()) ||
+    !Array.isArray(items) ||
+    items.length === 0 ||
+    typeof total !== 'number' ||
+    !Number.isFinite(total) ||
+    total < 0
+  ) {
+    return res.status(400).json({ error: 'Se requieren nombre, email válido, al menos un producto y un total válido' });
+  }
+
+  const products = readData('productos');
+  const quantitiesByProduct = new Map();
+  for (const item of items) {
+    const productId = Number(item?.id);
+    if (!Number.isSafeInteger(productId) || productId <= 0 || !isPositiveInteger(item?.cantidad)) {
+      return res.status(400).json({ error: 'Cada producto debe tener un id y una cantidad entera positiva' });
+    }
+
+    const product = products.find((candidate) => candidate.id === productId);
+    if (!product) return res.status(400).json({ error: `El producto ${productId} no existe` });
+
+    const quantity = (quantitiesByProduct.get(productId) ?? 0) + item.cantidad;
+    if (quantity > product.stock) {
+      return res.status(400).json({ error: `Stock insuficiente para el producto ${productId}` });
+    }
+    quantitiesByProduct.set(productId, quantity);
+  }
+
+  const normalizedItems = [...quantitiesByProduct].map(([productId, cantidad]) => {
+    const product = products.find((candidate) => candidate.id === productId);
+    return {
+      id: product.id,
+      nombre: product.nombre,
+      cantidad,
+      precio: product.precio
+    };
+  });
+  const totalInCents = normalizedItems.reduce(
+    (sum, item) => sum + Math.round(item.precio * 100) * item.cantidad,
+    0
+  );
+  const calculatedTotal = Number((totalInCents / 100).toFixed(2));
+  if (Math.round(total * 100) !== totalInCents) {
+    return res.status(400).json({ error: 'El total enviado no coincide con los productos y precios actuales' });
+  }
+
+  const orders = readData('pedidos');
+  const orderId = randomUUID();
+  const order = {
+    orderId,
+    user: { nombre: user.nombre.trim(), email: user.email.trim() },
+    items: normalizedItems,
+    total: calculatedTotal,
+    estado: 'pendiente',
+    fecha: new Date().toISOString()
+  };
+  orders.push(order);
+  writeData('pedidos', orders);
+
+  res.status(201).json({
+    success: true,
+    orderId,
+    message: 'Orden creada con éxito',
+    total: calculatedTotal
+  });
+});
 
 app.get('/api/productos', (req, res) => {
   res.json(readData('productos'));
@@ -273,6 +363,8 @@ app.delete('/api/ventas/:id', (req, res) => {
   writeData('ventas', sales);
   res.json({ mensaje: 'Venta eliminada', venta: deleted });
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.use((req, res) => {
   res.status(404).json({ error: 'Ruta no encontrada' });

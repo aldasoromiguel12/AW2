@@ -1,0 +1,20 @@
+[
+  {
+    "orderId": "52f24481-2029-4773-8406-7030f48c9d9d",
+    "user": {
+      "nombre": "llk",
+      "email": "miguelaldasorocabj@hotmail.com"
+    },
+    "items": [
+      {
+        "id": 2,
+        "nombre": "Short Deportivo Light",
+        "cantidad": 1,
+        "precio": 19999
+      }
+    ],
+    "total": 19999,
+    "estado": "pendiente",
+    "fecha": "2026-10-09T20:51:48.668Z"
+  }
+]

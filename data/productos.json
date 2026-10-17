@@ -6,7 +6,7 @@
     "categoria": "Remeras",
     "precio": 24999.00,
     "stock": 25,
-    "imagen": "https://example.com/images/remera_running_pro.jpg",
+    "imagen": "https://images.pexels.com/photos/34277473/pexels-photo-34277473.jpeg?cs=srgb&dl=pexels-cristian-camilo-estrada-2152272341-34277473.jpg&fm=jpg",
     "disponible": true
   },
   {
@@ -16,7 +16,7 @@
     "categoria": "Shorts",
     "precio": 19999.00,
     "stock": 30,
-    "imagen": "https://example.com/images/short_deportivo_light.jpg",
+    "imagen": "https://images.pexels.com/photos/4803921/pexels-photo-4803921.jpeg?cs=srgb&dl=pexels-ketut-subiyanto-4803921.jpg&fm=jpg",
     "disponible": true
   },
   {
@@ -26,7 +26,7 @@
     "categoria": "Zapatillas",
     "precio": 125000.00,
     "stock": 12,
-    "imagen": "https://example.com/images/zapatillas_runner_x.jpg",
+    "imagen": "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=85",
     "disponible": true
   },
   {
@@ -36,7 +36,7 @@
     "categoria": "Buzos",
     "precio": 44000.00,
     "stock": 18,
-    "imagen": "https://example.com/images/buzo_hoodie.jpg",
+    "imagen": "https://images.pexels.com/photos/17883716/pexels-photo-17883716.jpeg?cs=srgb&dl=pexels-marcuschanmedia-17883716.jpg&fm=jpg",
     "disponible": true
   },
   {
@@ -46,7 +46,7 @@
     "categoria": "Camperas",
     "precio": 80000,
     "stock": 7,
-    "imagen": "https://example.com/images/campera_impermeable.jpg",
+    "imagen": "https://images.pexels.com/photos/35625424/pexels-photo-35625424.jpeg?cs=srgb&dl=pexels-joint-x-2158831780-35625424.jpg&fm=jpg",
     "disponible": true
   },
   {
@@ -56,7 +56,7 @@
     "categoria": "Accesorios",
     "precio": 20000,
     "stock": 50,
-    "imagen": "https://example.com/images/medias_pack3.jpg",
+    "imagen": "https://images.pexels.com/photos/10923072/pexels-photo-10923072.jpeg?cs=srgb&dl=pexels-gonzalo-acuna-166058093-10923072.jpg&fm=jpg",
     "disponible": true
   },
   {
@@ -66,7 +66,7 @@
     "categoria": "Accesorios",
     "precio": 40000.00,
     "stock": 40,
-    "imagen": "https://example.com/images/gorra_uv.jpg",
+    "imagen": "https://images.unsplash.com/photo-1521369909029-2afed882baee?auto=format&fit=crop&w=900&q=85",
     "disponible": true
   },
   {
@@ -76,7 +76,7 @@
     "categoria": "Leggings",
     "precio": 35000.00,
     "stock": 20,
-    "imagen": "https://example.com/images/leggings_comfort.jpg",
+    "imagen": "https://images.pexels.com/photos/16701769/pexels-photo-16701769.jpeg?cs=srgb&dl=pexels-camviustudio-16701769.jpg&fm=jpg",
     "disponible": true
   }
 ]

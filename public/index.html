@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#14221d">
+    <title>Ritmo | Tienda de running</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css?v=3">
+  </head>
+  <body>
+    <a class="skip-link" href="#catalogo">Ir al catálogo</a>
+
+    <div class="announcement">
+      <p>ENVÍO GRATIS EN COMPRAS MAYORES A $80.000</p>
+      <span>Hecho para moverte.</span>
+    </div>
+
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="Ritmo, inicio">
+        <span class="brand-mark" aria-hidden="true">R</span>
+        <span>ritmo<span class="brand-period">.</span></span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link is-current" href="#catalogo">Tienda</a>
+      </nav>
+
+      <button class="header-cart" type="button" aria-label="Carrito, 0 artículos">
+        <span>Carrito</span>
+        <span id="header-cart-count" class="cart-count" aria-hidden="true">0</span>
+      </button>
+    </header>
+
+    <main id="catalogo" class="page-shell">
+      <div class="page-heading">
+        <div>
+          <p class="eyebrow"><span class="eyebrow-dot"></span> EQUIPO PARA CADA KILÓMETRO</p>
+          <h1>Encontrá tu <span>ritmo.</span></h1>
+          <p class="heading-copy">Prendas y accesorios listos para salir a correr.</p>
+        </div>
+        <p class="catalog-count"><strong id="product-count">08</strong> productos</p>
+      </div>
+
+      <div class="store-layout">
+        <section class="catalog" aria-label="Catálogo de productos">
+          <div class="catalog-toolbar">
+            <div class="category-filters" role="group" aria-label="Filtrar por categoría">
+              <button class="filter-button is-selected" type="button" data-category="" aria-pressed="true">Todo <span>08</span></button>
+              <button class="filter-button" type="button" data-category="Remeras" aria-pressed="false">Remeras</button>
+              <button class="filter-button" type="button" data-category="Shorts" aria-pressed="false">Shorts</button>
+              <button class="filter-button" type="button" data-category="Zapatillas" aria-pressed="false">Zapatillas</button>
+              <button class="filter-button" type="button" data-category="Buzos" aria-pressed="false">Buzos</button>
+              <button class="filter-button" type="button" data-category="Camperas" aria-pressed="false">Camperas</button>
+              <button class="filter-button" type="button" data-category="Accesorios" aria-pressed="false">Accesorios</button>
+              <button class="filter-button" type="button" data-category="Leggings" aria-pressed="false">Leggings</button>
+            </div>
+            <div class="sort-control">
+              <span>Ordenar</span>
+              <div class="sort-options" role="group" aria-label="Orden de productos">
+                <button class="sort-button is-selected" type="button" data-sort="destacados" aria-pressed="true">Destacados</button>
+                <button class="sort-button" type="button" data-sort="precio-asc" aria-pressed="false">Menor precio</button>
+                <button class="sort-button" type="button" data-sort="precio-desc" aria-pressed="false">Mayor precio</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="product-grid" class="product-grid" aria-live="polite" aria-busy="true">
+            <p class="product-state" role="status">Cargando productos...</p>
+          </div>
+        </section>
+
+        <aside class="cart-panel" aria-labelledby="cart-title">
+          <div class="cart-heading">
+            <div>
+              <p class="eyebrow">TU SELECCIÓN</p>
+              <h2 id="cart-title">Tu carrito <span id="cart-item-count">(0)</span></h2>
+            </div>
+            <span class="cart-status" aria-label="Carrito con artículos">●</span>
+          </div>
+
+          <ul id="cart-items" class="cart-items" aria-live="polite">
+            <li class="cart-empty">Tu carrito está vacío.</li>
+          </ul>
+
+          <div class="cart-summary">
+            <p><span>Subtotal</span><strong id="cart-subtotal">$0</strong></p>
+            <p><span>Envío</span><strong class="shipping-free">Gratis</strong></p>
+            <p class="cart-total"><span>Total</span><strong id="cart-total">$0</strong></p>
+          </div>
+
+          <form id="buyer-form" class="buyer-form">
+            <fieldset>
+              <legend>Datos del comprador</legend>
+              <label for="buyer-name">Nombre</label>
+              <input id="buyer-name" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required>
+              <label for="buyer-email">Email</label>
+              <input id="buyer-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
+            </fieldset>
+            <button id="checkout-button" class="checkout-button" type="submit" disabled>Finalizar compra <span aria-hidden="true">↗</span></button>
+            <p id="checkout-message" class="checkout-message" role="status" aria-live="polite"></p>
+            <p class="secure-note">Pago seguro · Cambios simples</p>
+          </form>
+        </aside>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <a class="brand footer-brand" href="/" aria-label="Ritmo, inicio"><span class="brand-mark" aria-hidden="true">R</span><span>ritmo<span class="brand-period">.</span></span></a>
+      <p>Córdoba, Argentina <span>·</span> Corré a tu manera.</p>
+      <span class="footer-season">COLECCIÓN 2026</span>
+    </footer>
+    <script type="module" src="/js/products.js?v=3"></script>
+  </body>
+</html>

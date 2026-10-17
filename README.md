@@ -1,10 +1,8 @@
-# API de productos, usuarios y ventas
+# Tienda Ritmo y API
 
-Este proyecto es un servidor: recibe pedidos y devuelve datos en formato JSON.
+Aplicación de tienda con frontend estático servido por Express y API REST. El catálogo se lee desde `data/productos.json`; el carrito se guarda en el navegador y las órdenes se almacenan en `data/pedidos.json`.
 
-Los datos se guardan en los archivos de la carpeta `data/`.
-
-> Importante: este proyecto usa ES modules (`"type": "module"` en `package.json`). El código está escrito con sintaxis ES6/import-export y no con CommonJS.
+Las órdenes guardan una copia del nombre y email del comprador, los productos, precios vigentes, cantidades, total, fecha y estado inicial `pendiente`. El endpoint valida los productos, el stock disponible y el total calculado desde el catálogo. Las órdenes pendientes no descuentan stock; las ventas registradas por `/api/ventas` sí lo hacen.
 
 ## Cómo iniciar el servidor
 
@@ -21,7 +19,42 @@ El servidor funciona en:
 http://localhost:3000
 ```
 
-Para probar las rutas GET se puede usar el navegador. Para probar POST, PUT y DELETE se puede usar Postman o Thunder Client.
+La tienda se abre en `http://localhost:3000`. Para ejecutar las pruebas automatizadas:
+
+```bash
+npm test
+```
+
+Las pruebas usan una copia temporal de los datos y no modifican los archivos reales de `data/`.
+
+## Rutas usadas por la tienda
+
+| Método | Ruta | Qué hace |
+|---|---|---|
+| GET | `/api/products` | Lista todos los productos. |
+| GET | `/api/products?category=Accesorios` | Filtra por categoría, sin distinguir mayúsculas. |
+| POST | `/api/orders` | Valida y guarda una orden en `data/pedidos.json`. |
+
+Body para crear una orden desde Postman o Thunder Client:
+
+```json
+{
+  "user": {
+    "nombre": "Ana Pérez",
+    "email": "ana@example.com"
+  },
+  "items": [
+    { "id": 1, "cantidad": 2 }
+  ],
+  "total": 49998
+}
+```
+
+La API responde `201` con `success`, `orderId`, `message` y el total validado. Rechaza órdenes vacías, datos del comprador inválidos, productos inexistentes, cantidades no válidas, falta de stock o totales que no coinciden con los precios actuales.
+
+## Rutas de la API existente
+
+Para probar POST, PUT y DELETE se puede usar Postman o Thunder Client.
 
 ## Rutas de productos
 
@@ -67,7 +100,6 @@ Body para iniciar sesión:
 ```
 
 El campo `telefono` es un string.
-
 ## Rutas de ventas
 
 | Método | Ruta | Qué hace |
@@ -96,13 +128,4 @@ Body para crear una venta:
 }
 ```
 
-El servidor calcula el total de la venta y verifica que existan el usuario y los productos.
 
-## Respuestas frecuentes
-
-- `200`: operación correcta.
-- `201`: registro creado.
-- `400`: datos enviados incorrectos.
-- `401`: email o password incorrectos.
-- `404`: no se encontró el recurso.
-- `409`: no se puede realizar la operación por una relación existente o un dato repetido.
