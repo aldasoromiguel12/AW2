@@ -4,7 +4,7 @@
     "nombre": "María",
     "apellido": "González",
     "email": "maria.gonzalez@example.com",
-    "password": "P4ssw0rd!",
+    "password": "$2b$12$BI3247GaHUEqJy6unMjRXu2Y9899W8djy2W9/ZHXGYYttU3IdaDW6",
     "telefono": "+5491123456789",
     "activo": true
   },
@@ -13,7 +13,7 @@
     "nombre": "Javier",
     "apellido": "Pérez",
     "email": "javier.perez@example.com",
-    "password": "jP3r3z2026",
+    "password": "$2b$12$yCc1VakygKyQw/e6W3wfie9YG7Tx9Uiv3hOWT6vzYpCO5RDZwxjpq",
     "telefono": "+5491166677788",
     "activo": true
   },
@@ -22,16 +22,16 @@
     "nombre": "Lucía",
     "apellido": "Ramírez",
     "email": "lucia.ramirez@example.com",
-    "password": "lR!m2020",
+    "password": "$2b$12$4dt28AGGk3oWeJpNDU6NCuTY9j1q4d.8wvB1.4X9tXbacUfMem7Sa",
     "telefono": "+5491177788990",
     "activo": false
   },
   {
     "id": 4,
-    "nombre": "Martín",
-    "apellido": "Rodríguez",
-    "email": "martin.rodriguez@example.com",
-    "password": "mRod-55",
+    "nombre": "Miguel",
+    "apellido": "Aldasoro",
+    "email": "aldasoromiguel@gmail.com",
+    "password": "aldasoro",
     "telefono": "+5491144455566",
     "activo": true
   },
@@ -40,7 +40,7 @@
     "nombre": "Ana",
     "apellido": "Fernández",
     "email": "ana.fernandez@example.com",
-    "password": "AneF#99",
+    "password": "$2b$12$cVUp3lflgbSDfucfH.7ewu8OxLQaPFytFSQUY9bG7kP5vMq8tqnLW",
     "telefono": "+5491133332221",
     "activo": true
   }

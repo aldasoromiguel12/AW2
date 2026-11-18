@@ -93,11 +93,23 @@
 
           <form id="buyer-form" class="buyer-form">
             <fieldset>
-              <legend>Datos del comprador</legend>
-              <label for="buyer-name">Nombre</label>
-              <input id="buyer-name" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required>
-              <label for="buyer-email">Email</label>
-              <input id="buyer-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email" required>
+              <legend>Tu cuenta</legend>
+              <div id="account-fields">
+                <label for="buyer-name">Nombre</label>
+                <input id="buyer-name" name="nombre" type="text" placeholder="Tu nombre" autocomplete="given-name">
+                <label for="buyer-lastname">Apellido</label>
+                <input id="buyer-lastname" name="apellido" type="text" placeholder="Tu apellido" autocomplete="family-name">
+                <label for="buyer-email">Email</label>
+                <input id="buyer-email" name="email" type="email" placeholder="tu@email.com" autocomplete="email">
+                <label for="buyer-password">Contraseña</label>
+                <input id="buyer-password" name="password" type="password" placeholder="Al menos 8 caracteres" autocomplete="current-password">
+                <div class="account-actions">
+                  <button id="login-button" type="button">Iniciar sesión</button>
+                  <button id="register-button" type="button">Crear cuenta</button>
+                </div>
+              </div>
+              <p id="account-status" class="checkout-message" role="status" aria-live="polite"></p>
+              <button id="logout-button" class="logout-button" type="button" hidden>Cerrar sesión</button>
             </fieldset>
             <button id="checkout-button" class="checkout-button" type="submit" disabled>Finalizar compra <span aria-hidden="true">↗</span></button>
             <p id="checkout-message" class="checkout-message" role="status" aria-live="polite"></p>

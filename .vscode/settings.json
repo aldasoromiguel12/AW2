@@ -1,5 +1,11 @@
 {
   "terminal.integrated.env.windows": {
     "PATH": "C:\\Program Files\\nodejs;${env:PATH}"
+  },
+  "liveServer.settings.root": "/public",
+  "liveServer.settings.proxy": {
+    "enable": true,
+    "baseUri": "/api",
+    "proxyUri": "http://127.0.0.1:3000/api"
   }
 }

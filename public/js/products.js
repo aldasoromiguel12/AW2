@@ -14,8 +14,25 @@ const cartTotal = document.querySelector('#cart-total');
 const checkoutButton = document.querySelector('#checkout-button');
 const buyerForm = document.querySelector('#buyer-form');
 const checkoutMessage = document.querySelector('#checkout-message');
+const accountFields = document.querySelector('#account-fields');
+const accountStatus = document.querySelector('#account-status');
+const loginButton = document.querySelector('#login-button');
+const registerButton = document.querySelector('#register-button');
+const logoutButton = document.querySelector('#logout-button');
+const authTokenKey = 'ritmo-auth-token';
+const authUserKey = 'ritmo-auth-user';
 let productos = [];
 let compraEnCurso = false;
+let usuarioAutenticado = leerUsuarioAutenticado();
+
+function leerUsuarioAutenticado() {
+  try {
+    return JSON.parse(sessionStorage.getItem(authUserKey) || 'null');
+  } catch (error) {
+    console.warn('No se pudo recuperar la sesión:', error);
+    return null;
+  }
+}
 
 function leerCarritoGuardado() {
   try {
@@ -190,7 +207,7 @@ export function renderizarCarrito() {
   cartItemCount.textContent = `(${itemCount})`;
   cartSubtotal.textContent = priceFormatter.format(subtotal);
   cartTotal.textContent = priceFormatter.format(subtotal);
-  checkoutButton.disabled = itemCount === 0 || compraEnCurso;
+  checkoutButton.disabled = itemCount === 0 || compraEnCurso || !sessionStorage.getItem(authTokenKey);
   cartItemsList.replaceChildren(
     ...(carrito.length ? carrito.map(createCartItem) : [Object.assign(document.createElement('li'), {
       className: 'cart-empty',
@@ -205,6 +222,70 @@ function mostrarMensajeCompra(message, type = '') {
   checkoutMessage.classList.toggle('is-error', type === 'error');
 }
 
+function actualizarSesion(user) {
+  usuarioAutenticado = user;
+  if (user) {
+    sessionStorage.setItem(authUserKey, JSON.stringify(user));
+    accountFields.hidden = true;
+    logoutButton.hidden = false;
+    accountStatus.textContent = `Sesión iniciada como ${user.nombre} (${user.email}).`;
+    accountStatus.classList.remove('is-error');
+    accountStatus.classList.add('is-success');
+    checkoutButton.disabled = carrito.length === 0 || compraEnCurso;
+  } else {
+    sessionStorage.removeItem(authTokenKey);
+    sessionStorage.removeItem(authUserKey);
+    accountFields.hidden = false;
+    logoutButton.hidden = true;
+    accountStatus.textContent = '';
+    accountStatus.classList.remove('is-success', 'is-error');
+    renderizarCarrito();
+  }
+}
+
+async function autenticarComprador(mode) {
+  accountStatus.textContent = '';
+  const nombre = buyerForm.elements.nombre.value.trim();
+  const apellido = buyerForm.elements.apellido.value.trim();
+  const email = buyerForm.elements.email.value.trim();
+  const password = buyerForm.elements.password.value;
+  if (!email || !password || (mode === 'register' && (!nombre || !apellido))) {
+    accountStatus.textContent = mode === 'register'
+      ? 'Completa nombre, apellido, email y contraseña para crear tu cuenta.'
+      : 'Ingresa tu email y contraseña.';
+    accountStatus.classList.add('is-error');
+    return;
+  }
+
+  const credentials = { email, password };
+  try {
+    if (mode === 'register') {
+      const registration = await fetch('/api/usuarios', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ nombre, apellido, ...credentials })
+      });
+      const registrationResult = await registration.json();
+      if (!registration.ok) throw new Error(registrationResult.error || 'No se pudo crear la cuenta.');
+    }
+
+    const response = await fetch('/api/usuarios/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(credentials)
+    });
+    const result = await response.json();
+    if (!response.ok || !result.token) throw new Error(result.error || 'No se pudo iniciar sesión.');
+    sessionStorage.setItem(authTokenKey, result.token);
+    actualizarSesion(result.usuario);
+    buyerForm.elements.password.value = '';
+  } catch (error) {
+    accountStatus.textContent = error.message;
+    accountStatus.classList.remove('is-success');
+    accountStatus.classList.add('is-error');
+  }
+}
+
 // Envía la compra y conserva el carrito si el servidor no confirma la orden.
 async function finalizarCompra(event) {
   event.preventDefault();
@@ -215,18 +296,14 @@ async function finalizarCompra(event) {
     return;
   }
 
-  if (!buyerForm.reportValidity()) return;
-
-  const nombre = buyerForm.elements.nombre.value.trim();
-  const email = buyerForm.elements.email.value.trim();
-  if (!nombre || !email) {
-    mostrarMensajeCompra('Completa tu nombre y un email válido para continuar.', 'error');
+  const token = sessionStorage.getItem(authTokenKey);
+  if (!token) {
+    mostrarMensajeCompra('Inicia sesión antes de finalizar la compra.', 'error');
     return;
   }
 
   const total = carrito.reduce((sum, product) => sum + product.precio * product.cantidad, 0);
   const order = {
-    user: { nombre, email },
     items: carrito.map(({ id, nombre: productName, precio, cantidad }) => ({
       id,
       nombre: productName,
@@ -244,19 +321,19 @@ async function finalizarCompra(event) {
   try {
     const response = await fetch(new URL('/api/orders', window.location.origin), {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
       body: JSON.stringify(order)
     });
 
     const result = await response.json().catch(() => ({}));
     if (response.status !== 201 || !result.orderId) {
+      if (response.status === 401) actualizarSesion(null);
       throw new Error(result.error || 'No se pudo confirmar la orden. Intenta nuevamente.');
     }
 
     carrito = [];
     localStorage.removeItem('carrito');
     renderizarCarrito();
-    buyerForm.reset();
     mostrarMensajeCompra(`¡Compra realizada con éxito! Tu número de orden es ${result.orderId}.`, 'success');
   } catch (error) {
     console.error('No se pudo finalizar la compra:', error);
@@ -369,6 +446,10 @@ cartItemsList.addEventListener('click', (event) => {
 });
 
 buyerForm.addEventListener('submit', finalizarCompra);
+loginButton.addEventListener('click', () => autenticarComprador('login'));
+registerButton.addEventListener('click', () => autenticarComprador('register'));
+logoutButton.addEventListener('click', () => actualizarSesion(null));
+if (usuarioAutenticado && sessionStorage.getItem(authTokenKey)) actualizarSesion(usuarioAutenticado);
 
 renderizarCarrito();
 cargarProductos();
